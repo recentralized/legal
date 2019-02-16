@@ -6,6 +6,8 @@ import (
 	"io/ioutil"
 	"os"
 	"path"
+	"path/filepath"
+	"runtime"
 
 	"github.com/russross/blackfriday"
 )
@@ -33,34 +35,25 @@ type Variables struct {
 // DefaultVariables is the standard values for variables.
 var DefaultVariables = Variables{
 	ContactEmail:     "legal@recentalized.org",
-	TermsOfUseURL:    "/info/terms.html",
-	PrivacyPolicyURL: "/info/privacy.html",
-	CookiePolicyURL:  "/info/cookies.html",
+	TermsOfUseURL:    "terms.html",
+	PrivacyPolicyURL: "privacy.html",
+	CookiePolicyURL:  "cookies.html",
 }
 
 // HTML returns HTML for the policy.
 func HTML(policy string, vars Variables) ([]byte, error) {
-	path := path.Join(srcDir, policy) + ".md"
-
-	f, err := os.Open(path)
+	input, err := read(policy)
 	if err != nil {
 		return nil, err
 	}
-	defer f.Close()
-
-	input, err := ioutil.ReadAll(f)
-	if err != nil {
-		return nil, err
-	}
-
-	output, err := renderBytes(input, vars)
+	output, err := render(input, vars)
 	if err != nil {
 		return nil, err
 	}
 	return output, nil
 }
 
-func renderBytes(input []byte, vars Variables) ([]byte, error) {
+func render(input []byte, vars Variables) ([]byte, error) {
 	// First render as golang template.
 	tmpl, err := template.New("content").Parse(string(input))
 	if err != nil {
@@ -73,4 +66,31 @@ func renderBytes(input []byte, vars Variables) ([]byte, error) {
 	}
 	// Then render as markdown.
 	return blackfriday.Run(out.Bytes()), nil
+}
+
+func read(name string) ([]byte, error) {
+	path := filepath.Join(getPath(), srcDir, name) + ".md"
+	f, err := os.Open(path)
+	if err != nil {
+		return nil, err
+	}
+	defer f.Close()
+	data, err := ioutil.ReadAll(f)
+	if err != nil {
+		return nil, err
+	}
+	return data, nil
+}
+
+var pkgPath string
+
+func getPath() string {
+	if pkgPath == "" {
+		_, f, _, ok := runtime.Caller(1)
+		if !ok {
+			panic("failed to get `legal` package path")
+		}
+		pkgPath = path.Dir(f)
+	}
+	return pkgPath
 }
