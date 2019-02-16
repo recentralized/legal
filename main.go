@@ -2,13 +2,10 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path"
 	"path/filepath"
 	"strings"
-
-	"github.com/russross/blackfriday"
 )
 
 const (
@@ -25,34 +22,27 @@ func main() {
 	}
 
 	for _, path := range paths {
-		out := pathFor(path)
+		in, out := pathsFor(path)
 		fmt.Printf("Rendering %s to %s\n", path, out)
-		store(out, render(path))
+		store(out, render(in))
 	}
 }
 
-func pathFor(p string) string {
+func pathsFor(p string) (string, string) {
 	base := path.Base(p)
 	ext := path.Ext(p)
-	base = strings.Replace(base, ext, ".html", 1)
-	return path.Join(dstDir, base)
+	name := strings.Replace(base, ext, "", 1)
+	output := strings.Replace(base, ext, ".html", 1)
+	return name, path.Join(dstDir, output)
 }
 
-func render(path string) []byte {
-	f, err := os.Open(path)
+func render(name string) []byte {
+	output, err := HTML(name, DefaultVariables)
 	if err != nil {
-		fmt.Printf("Failed to open file: %v\n", err)
+		fmt.Printf("Failed to render: %v\n", err)
 		os.Exit(1)
 	}
-	defer f.Close()
-
-	input, err := ioutil.ReadAll(f)
-	if err != nil {
-		fmt.Printf("Failed to read file: %v\n", err)
-		os.Exit(1)
-	}
-
-	return blackfriday.Run(input)
+	return output
 }
 
 func store(path string, data []byte) {

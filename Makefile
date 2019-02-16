@@ -1,7 +1,7 @@
 default: build
 
 build: dist
-	go run main.go
+	go run .
 
 clean:
 	rm -r dist
