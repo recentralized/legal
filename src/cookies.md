@@ -2,7 +2,7 @@
 
 Effective date:  February 20, 2019
 
-Please remember that your use of the Services is at all times subject to the Terms of Use[insert link] and Privacy Policy[insert link], which incorporate this Cookie Policy.  Any terms we use in this Cookie Policy without defining them have the definitions given to them in the Terms of Use and Privacy Policy.
+Please remember that your use of the Services is at all times subject to the [Terms of Use]({{.TermsOfUseURL}}) and [Privacy Policy]({{.PrivacyPolicyURL}}), which incorporate this Cookie Policy.  Any terms we use in this Cookie Policy without defining them have the definitions given to them in the Terms of Use and Privacy Policy.
 
 ## What are Cookies?
 
@@ -66,5 +66,5 @@ You can decide whether or not to accept Cookies.  One way you can do this is thr
 
 To explore what Cookie settings are available to you, look in the “preferences” or “options” section of your browser’s menu. 
 
-If you have any questions regarding this Cookie Policy, please contact us at [insert email].
+If you have any questions regarding this Cookie Policy, please contact us at {{.ContactEmail}}.
 
