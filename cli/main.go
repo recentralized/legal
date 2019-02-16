@@ -6,6 +6,8 @@ import (
 	"path"
 	"path/filepath"
 	"strings"
+
+	"github.com/recentralized/legal"
 )
 
 const (
@@ -37,7 +39,7 @@ func pathsFor(p string) (string, string) {
 }
 
 func render(name string) []byte {
-	output, err := HTML(name, DefaultVariables)
+	output, err := legal.HTML(name, legal.DefaultVariables)
 	if err != nil {
 		fmt.Printf("Failed to render: %v\n", err)
 		os.Exit(1)

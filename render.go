@@ -1,4 +1,4 @@
-package main
+package legal
 
 import (
 	"bytes"
@@ -8,6 +8,10 @@ import (
 	"path"
 
 	"github.com/russross/blackfriday"
+)
+
+const (
+	srcDir = "src"
 )
 
 // Variables are the placeholder values used by the markdown templates.
