@@ -1,7 +1,11 @@
 package main
 
 import (
+	"flag"
 	"fmt"
+	"io"
+	"log"
+	"net/http"
 	"os"
 	"path"
 	"path/filepath"
@@ -13,10 +17,69 @@ import (
 const (
 	srcDir = "src"
 	dstDir = "dist"
+	port   = "3333"
 )
 
 func main() {
+	var (
+		s bool
+		w bool
+	)
 
+	flag.BoolVar(&s, "s", false, "run a server to preview content")
+	flag.BoolVar(&w, "w", true, "write documents to dist dir")
+	flag.Parse()
+
+	if s {
+		serve()
+		os.Exit(0)
+	}
+	if w {
+		write()
+		os.Exit(0)
+	}
+}
+
+func serve() {
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		w.Write([]byte(stylesheet))
+		if r.URL.Path == "/" {
+			indexPage(w)
+			return
+		}
+		name := strings.TrimPrefix(r.URL.Path, "/")
+		result, err := render(name)
+		if err != nil {
+			fmt.Fprintf(w, "Failed to render: %v\n", err)
+			return
+		}
+		w.Write(result)
+	})
+	log.Printf("Serving on http://localhost:%s", port)
+	http.ListenAndServe(":"+port, nil)
+}
+
+var stylesheet = `
+<style>
+body{ margin: 0 auto; width: 50%; }
+</style>
+`
+
+func indexPage(w io.Writer) {
+	paths, err := filepath.Glob(srcDir + "/*.md")
+	if err != nil {
+		fmt.Printf("Failed to list files: %v\n", err)
+		os.Exit(1)
+	}
+	fmt.Fprintf(w, `<h1>Legal Docs Preview</h1>`)
+	for _, path := range paths {
+		name, _ := pathsFor(path)
+		fmt.Fprintf(w, `<li><a href="/%s">%s</a></li>`, name, strings.Title(name))
+	}
+}
+
+func write() {
 	paths, err := filepath.Glob(srcDir + "/*.md")
 	if err != nil {
 		fmt.Printf("Failed to list files: %v\n", err)
@@ -26,7 +89,12 @@ func main() {
 	for _, path := range paths {
 		in, out := pathsFor(path)
 		fmt.Printf("Rendering %s to %s\n", path, out)
-		store(out, render(in))
+		result, err := render(in)
+		if err != nil {
+			fmt.Printf("Failed to render: %v\n", err)
+			os.Exit(1)
+		}
+		store(out, result)
 	}
 }
 
@@ -38,13 +106,12 @@ func pathsFor(p string) (string, string) {
 	return name, path.Join(dstDir, output)
 }
 
-func render(name string) []byte {
+func render(name string) ([]byte, error) {
 	output, err := legal.HTML(name, legal.DefaultVariables)
 	if err != nil {
-		fmt.Printf("Failed to render: %v\n", err)
-		os.Exit(1)
+		return nil, err
 	}
-	return output
+	return output, nil
 }
 
 func store(path string, data []byte) {
