@@ -1,12 +1,19 @@
-default: build
+default: gen
 
-build: dist
-	go run cli/main.go
+gen: build dist
+	bin/legal -w
+
+serve: build
+	bin/legal -s
 
 clean:
 	rm -r dist
+	rm -r bin
+
+build:
+	go build -o bin/legal cli/main.go
 
 dist:
 	@mkdir -p dist
 
-.PHONY: clean
+.PHONY: build clean gen serve
