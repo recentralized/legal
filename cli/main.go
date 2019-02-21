@@ -12,10 +12,11 @@ import (
 	"strings"
 
 	"github.com/recentralized/legal"
+	"github.com/recentralized/legal/policies"
 )
 
-const (
-	srcDir = "src"
+var (
+	srcDir = policies.Path
 	dstDir = "dist"
 	port   = "3333"
 )
@@ -86,9 +87,9 @@ func write() {
 		os.Exit(1)
 	}
 
-	for _, path := range paths {
-		in, out := pathsFor(path)
-		fmt.Printf("Rendering %s to %s\n", path, out)
+	for _, fpath := range paths {
+		in, out := pathsFor(fpath)
+		fmt.Printf("Rendering %s to %s\n", path.Base(fpath), out)
 		result, err := render(in)
 		if err != nil {
 			fmt.Printf("Failed to render: %v\n", err)

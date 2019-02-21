@@ -7,7 +7,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/recentralized/legal/src"
+	"github.com/recentralized/legal/policies"
 	"github.com/russross/blackfriday"
 )
 
@@ -68,7 +68,7 @@ func render(input []byte, vars Variables) ([]byte, error) {
 }
 
 func read(name string) ([]byte, error) {
-	path := filepath.Join(src.GetPath(), name) + ".md"
+	path := filepath.Join(policies.Path, name) + ".md"
 	f, err := os.Open(path)
 	if err != nil {
 		return nil, err
