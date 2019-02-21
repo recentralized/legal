@@ -22,6 +22,9 @@ type Variables struct {
 	// Email address that users should contact.
 	ContactEmail string
 
+	// Physical address of Recentralied Corporation.
+	MailingAddress string
+
 	// URL pointing to the Terms of Use.
 	TermsOfUseURL string
 
@@ -35,9 +38,10 @@ type Variables struct {
 // DefaultVariables is the standard values for variables.
 var DefaultVariables = Variables{
 	ContactEmail:     "legal@recentalized.org",
-	TermsOfUseURL:    "terms.html",
-	PrivacyPolicyURL: "privacy.html",
-	CookiePolicyURL:  "cookies.html",
+	MailingAddress:   "1569 Solano Ave #409 Berkeley, CA 94707",
+	TermsOfUseURL:    "/terms",
+	PrivacyPolicyURL: "/privacy",
+	CookiePolicyURL:  "/cookies",
 }
 
 // HTML returns HTML for the policy.
