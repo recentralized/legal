@@ -1,0 +1,5 @@
+* **It’s your content.** You promise that the content you manage with Recentralized is yours; that you have the right to license it, and that it does not violate any laws or cause injury to others.
+* **It stays your content.** You maintain ownership, copyright, and all intellectual property rights to the content that you manage with Recentralized. You give us permission to access and manipulate that content in order to provide you with services.
+* **Your data is your data.** The data that you bring to Recentralized is yours. In most cases, it’s already on a storage provider that you choose.
+* **You can stop (and start) at any time.** You can choose to stop using our services at any time. Not only can you keep your data, but we’ll provide free tools to help you manage it. Bring your data back and we’ll pick up where we left off.
+* **You’ll keep your data secure.** Please ensure that your Recentralized account, as well as any third-party services that you integrate, is well secured and accessible only by you.
