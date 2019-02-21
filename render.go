@@ -5,15 +5,10 @@ import (
 	"html/template"
 	"io/ioutil"
 	"os"
-	"path"
 	"path/filepath"
-	"runtime"
 
+	"github.com/recentralized/legal/src"
 	"github.com/russross/blackfriday"
-)
-
-const (
-	srcDir = "src"
 )
 
 // Variables are the placeholder values used by the markdown templates.
@@ -69,7 +64,7 @@ func render(input []byte, vars Variables) ([]byte, error) {
 }
 
 func read(name string) ([]byte, error) {
-	path := filepath.Join(getPath(), srcDir, name) + ".md"
+	path := filepath.Join(src.GetPath(), name) + ".md"
 	f, err := os.Open(path)
 	if err != nil {
 		return nil, err
@@ -80,17 +75,4 @@ func read(name string) ([]byte, error) {
 		return nil, err
 	}
 	return data, nil
-}
-
-var pkgPath string
-
-func getPath() string {
-	if pkgPath == "" {
-		_, f, _, ok := runtime.Caller(1)
-		if !ok {
-			panic("failed to get `legal` package path")
-		}
-		pkgPath = path.Dir(f)
-	}
-	return pkgPath
 }
