@@ -52,16 +52,16 @@ The Services may allow you to copy or download certain Content; please remember 
 
 You represent, warrant, and agree that you will not contribute any Content or User Submission (each of those terms is defined below) or otherwise use the Services or interact with the Services in a manner that:
 
-a) Infringes or violates the intellectual property rights or any other rights of anyone else (including Recentralized);
-a) Violates any law or regulation, including, without limitation, any applicable export control laws;
-a) Is harmful, fraudulent, deceptive, threatening, harassing, defamatory, obscene, or otherwise objectionable;
-a) Jeopardizes the security of your Recentralized account or anyone else’s (such as allowing someone else to log in to the Services as you);
-a) Attempts, in any manner, to obtain the password, account, or other security information from any other user;
-a) Violates the security of any computer network, or cracks any passwords or security encryption codes;
-a) Runs Maillist, Listserv, any form of auto-responder or “spam” on the Services, or any processes that run or are activated while you are not logged into the Services, or that otherwise interfere with the proper working of the Services (including by placing an unreasonable load on the Services’ infrastructure);
-a) “Crawls,” “scrapes,” or “spiders” any page, data, or portion of or relating to the Services or Content (through use of manual or automated means);
-a) Copies or stores any significant portion of the Content (except any Content you own);
-a) Decompiles, reverse engineers, or otherwise attempts to obtain the source code or underlying ideas or information of or relating to the Services.
+1. Infringes or violates the intellectual property rights or any other rights of anyone else (including Recentralized);
+1. Violates any law or regulation, including, without limitation, any applicable export control laws;
+1. Is harmful, fraudulent, deceptive, threatening, harassing, defamatory, obscene, or otherwise objectionable;
+1. Jeopardizes the security of your Recentralized account or anyone else’s (such as allowing someone else to log in to the Services as you);
+1. Attempts, in any manner, to obtain the password, account, or other security information from any other user;
+1. Violates the security of any computer network, or cracks any passwords or security encryption codes;
+1. Runs Maillist, Listserv, any form of auto-responder or “spam” on the Services, or any processes that run or are activated while you are not logged into the Services, or that otherwise interfere with the proper working of the Services (including by placing an unreasonable load on the Services’ infrastructure);
+1. “Crawls,” “scrapes,” or “spiders” any page, data, or portion of or relating to the Services or Content (through use of manual or automated means);
+1. Copies or stores any significant portion of the Content (except any Content you own);
+1. Decompiles, reverse engineers, or otherwise attempts to obtain the source code or underlying ideas or information of or relating to the Services.
 
 A violation of any of the foregoing is grounds for termination of your right to use or access the Services. 
 
