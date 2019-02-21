@@ -32,7 +32,7 @@ The Children’s Online Privacy Protection Act (**“COPPA”**) requires that o
 
 ## How do I access and use the Services?
 
-You may access the Services by visiting www.recentralized.org and/or by using any software that utilizes our services.  Also, in order to use the Services, you may be required to sign up for an account and select a password and user name (“Account Credentials”) and provide profile information such as your email address.
+You may access the Services by visiting www.recentralized.org and/or by using any software that utilizes our Services.  Also, in order to use the Services, you may be required to sign up for an account and select a password and user name (“Account Credentials”) and provide profile information such as your email address.
 
 You promise to provide us with accurate, complete, and updated registration information about yourself.  You may not create an account, select Account Credentials, or otherwise use the Services using any name, information, account or Account Credentials that you do not have a right to use, or using another person’s name with the intent to impersonate that person.  You may not transfer your account to anyone else without our prior written permission. You will not share your account or Account Credentials with anyone, and you must protect the security of your account and your Account Credentials. You’re responsible for any activity associated with your account.
 
