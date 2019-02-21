@@ -4,7 +4,7 @@ This repo contains the public legal policies for Recentralized services. You can
 
 ## Versioning
 
-We'll mark [each change to these documents](./releases) with a git tag. In the
+We'll mark [each change to these documents](/recentralized/legal/releases) with a git tag. In the
 spirit of [Semantic Versioning](https://semver.org):
 
 * Changes that require user notification will increment the major version. 
