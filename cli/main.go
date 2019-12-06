@@ -68,7 +68,7 @@ body{ margin: 0 auto; width: 50%; }
 `
 
 func indexPage(w io.Writer) {
-	paths, err := filepath.Glob(srcDir + "/*.md")
+	paths, err := filepath.Glob(srcDir + "/**/*.md")
 	if err != nil {
 		fmt.Printf("Failed to list files: %v\n", err)
 		os.Exit(1)
@@ -81,7 +81,7 @@ func indexPage(w io.Writer) {
 }
 
 func write() {
-	paths, err := filepath.Glob(srcDir + "/*.md")
+	paths, err := filepath.Glob(srcDir + "/**/*.md")
 	if err != nil {
 		fmt.Printf("Failed to list files: %v\n", err)
 		os.Exit(1)
@@ -100,11 +100,12 @@ func write() {
 }
 
 func pathsFor(p string) (string, string) {
+	subDir := strings.Replace(path.Dir(p), srcDir, "", 1)
 	base := path.Base(p)
 	ext := path.Ext(p)
 	name := strings.Replace(base, ext, "", 1)
 	output := strings.Replace(base, ext, ".html", 1)
-	return name, path.Join(dstDir, output)
+	return path.Join(".", subDir, name), path.Join(dstDir, subDir, output)
 }
 
 func render(name string) ([]byte, error) {
@@ -115,8 +116,11 @@ func render(name string) ([]byte, error) {
 	return output, nil
 }
 
-func store(path string, data []byte) {
-	f, err := os.Create(path)
+func store(fpath string, data []byte) {
+	if err := os.MkdirAll(path.Dir(fpath), 0755); err != nil {
+		fmt.Printf("Failed to create dir: %v\n", err)
+	}
+	f, err := os.Create(fpath)
 	if err != nil {
 		fmt.Printf("Failed to open file: %v\n", err)
 		os.Exit(1)
